@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learn English - Your Path to Fluency</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0b1a36; /* Dark space blue */
+      color: #eee;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Space background decorations container */
+    .space-decorations {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 0;
+      background: radial-gradient(ellipse at bottom, #000020 0%, #0b1a36 100%);
+    }
+
+    /* Stars styling */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.85;
+      box-shadow:
+        0 0 6px 2px white,
+        0 0 4px 1px #8af;
+      animation: twinkle 3s infinite alternate;
+    }
+    .star.small {
+      width: 2px;
+      height: 2px;
+      animation-duration: 2s;
+    }
+    .star.medium {
+      width: 3.5px;
+      height: 3.5px;
+      animation-duration: 3.5s;
+    }
+    .star.large {
+      width: 5px;
+      height: 5px;
+      animation-duration: 4.5s;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0.3;
+        transform: scale(1);
+        box-shadow:
+          0 0 6px 2px white,
+          0 0 4px 1px #8af;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1.4);
+        box-shadow:
+          0 0 10px 5px white,
+          0 0 8px 3px #9cf;
+      }
+    }
+
+    /* Planet styling */
+    .planet {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at 30% 30%, #66ccff, #004080);
+      border-radius: 50%;
+      box-shadow:
+        inset 10px 10px 15px rgba(255 255 255 / 0.2),
+        0 0 20px rgba(102, 204, 255, 0.9);
+      animation: orbit 20s linear infinite;
+      transform-origin: center center;
+      z-index: 5;
+    }
+
+    /* Planet ring */
+    .planet::before {
+      content: "";
+      position: absolute;
+      top: 45%;
+      left: -20%;
+      width: 140%;
+      height: 15px;
+      background: rgba(100, 180, 255, 0.5);
+      border-radius: 50% / 100%;
+      box-shadow: 0 0 8px rgba(100, 180, 255, 0.7);
+      transform: rotate(25deg);
+    }
+
+    @keyframes orbit {
+      0% {
+        filter: drop-shadow(0 0 8px #3399ff);
+      }
+      50% {
+        filter: drop-shadow(0 0 20px #66ccff);
+      }
+      100% {
+        filter: drop-shadow(0 0 8px #3399ff);
+      }
+    }
+
+    /* Shooting star styling */
+    .shooting-star {
+      position: fixed;
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, white, rgba(255,255,255,0));
+      border-radius: 999px;
+      filter: drop-shadow(0 0 8px white);
+      opacity: 0;
+      pointer-events: none;
+      animation: shootingStarAnim 1.2s ease forwards;
+      z-index: 1;
+    }
+
+    @keyframes shootingStarAnim {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-300px, 200px);
+      }
+    }
+
+    /* Existing reset for main content */
+    header {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #4a90e2, #50e3c2);
+      color: white;
+      padding: 3rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(74,144,226,0.4);
+      overflow: visible;
+      border-radius: 0 0 20px 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 3rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-weight: 300;
+      font-size: 1.25rem;
+      color: #d0e6ff;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 10;
+      background: rgba(0, 30, 70, 0.85);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 50, 100, 0.8);
+    }
+    section {
+      margin-bottom: 3rem;
+      background: rgba(255 255 255 / 0.05);
+      padding: 2rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255 255 255 / 0.15);
+    }
+    h2 {
+      color: #98d6ff;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      border-bottom: 3px solid #5ec2ff;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    .resources ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .resources ul li {
+      background: rgba(255 255 255 / 0.1);
+      margin-bottom: 0.6rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      color: #bbdefb;
+      border: 1px solid rgba(255 255 255 / 0.1);
+    }
+    .quiz {
+      text-align: center;
+    }
+    .quiz-question {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #acdfff;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-options button {
+      background: #50e3c2;
+      border: none;
+      color: #003840;
+      font-size: 1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px;
+      transition: background-color 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(80,227,194,0.7);
+    }
+    .quiz-options button:hover {
+      background: #4a90e2;
+      color: white;
+      box-shadow: 0 4px 12px rgba(74,144,226,0.7);
+    }
+    .quiz-result {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #7ad0ff;
+      min-height: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    form input[type="email"] {
+      width: 80%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 2px solid #4a90e2;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+      background: rgba(255 255 255 / 0.15);
+      color: white;
+      border-color: #5ac8fa;
+    }
+    form input[type="email"]::placeholder {
+      color: #bbdefb;
+    }
+    form input[type="email"]:focus {
+      border-color: #50e3c2;
+      background: rgba(255 255 255 / 0.3);
+    }
+    form button {
+      background: #4a90e2;
+      border: none;
+      padding: 0.8rem 2rem;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(74,144,226,0.8);
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background: #50e3c2;
+      box-shadow: 0 4px 12px rgba(80,227,194,0.9);
+    }
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 1rem;
+      color: #99bbff;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255 255 255 / 0.15);
+      margin-top: 3rem;
+      background: transparent;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      section {
+        padding: 1.5rem 1rem;
+      }
+      .quiz-options button {
+        max-width: 100%;
+      }
+      form input[type="email"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Space themed decorative background -->
+  <div class="space-decorations" aria-hidden="true" id="space-decorations">
+    <div class="planet"></div>
+  </div>
+
+  <header>
+    <h1>Learn English Effortlessly</h1>
+    <p>Boost your English skills with fun lessons, quizzes, and tips!</p>
+  </header>
+  <main>
+    <section class="resources">
+      <h2>Essential Resources</h2>
+      <ul>
+        <li><strong>Grammar Tips:</strong> Master English grammar rules with clear explanations.</li>
+        <li><strong>Vocabulary Builders:</strong> Learn new words daily to expand your vocabulary.</li>
+        <li><strong>Listening Practice:</strong> Improve comprehension through audio exercises.</li>
+        <li><strong>Speaking Exercises:</strong> Gain confidence through practical speaking tips.</li>
+        <li><strong>Reading & Writing:</strong> Enhance your writing skills and reading comprehension.</li>
+      </ul>
+    </section>
+
+    <section class="quiz">
+      <h2>Quick Quiz: Test Your English</h2>
+      <div class="quiz-question" id="quiz-question">Loading question...</div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-result" id="quiz-result"></div>
+      <button id="next-btn" style="display:none; background:#4a90e2; margin: 0 auto; padding: 0.8rem 1.6rem; border-radius: 8px; color:white; border:none; font-weight:600; cursor:pointer;">Next Question</button>
+    </section>
+
+    <section class="newsletter">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to our newsletter to get new lessons and tips directly in your inbox!</p>
+      <form id="subscribe-form">
+        <input type="email" id="email" placeholder="Your email address" required />
+        <br />
+        <button type="submit">Subscribe</button>
+        <div id="form-message" style="margin-top:0.8rem; font-weight:600; color:#4a90e2;"></div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 Learn English. All rights reserved.
+  </footer>
+
+  <script>
+    const quizQuestions = [
+      {
+        question: "Choose the correct sentence:",
+        options: [
+          "She don't like apples.",
+          "She doesn't like apples.",
+          "She not like apples.",
+          "She isn't likes apples."
+        ],
+        answer: 1
+      },
+      {
+        question: "What is the synonym of 'happy'?",
+        options: [
+          "Sad",
+          "Joyful",
+          "Angry",
+          "Tired"
+        ],
+        answer: 1
+      },
+      {
+        question: "Fill in the blank: I _____ to the store yesterday.",
+        options: [
+          "go",
+          "goes",
+          "went",
+          "going"
+        ],
+        answer: 2
+      },
+      {
+        question: "Identify the noun in the sentence: 'The cat is sleeping on the mat.'",
+        options: [
+          "Sleeping",
+          "Cat",
+          "Is",
+          "On"
+        ],
+        answer: 1
+      },
+      {
+        question: "What is the plural form of 'child'?",
+        options: [
+          "Childs",
+          "Childes",
+          "Children",
+          "Child"
+        ],
+        answer: 2
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    const questionEl = document.getElementById('quiz-question');
+    const optionsEl = document.getElementById('quiz-options');
+    const resultEl = document.getElementById('quiz-result');
+    const nextBtn = document.getElementById('next-btn');
+
+    function loadQuestion() {
+      resultEl.textContent = '';
+      nextBtn.style.display = 'none';
+      const current = quizQuestions[currentQuestionIndex];
+      questionEl.textContent = current.question;
+      optionsEl.innerHTML = '';
+      current.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => selectAnswer(index);
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selectedIndex) {
+      const current = quizQuestions[currentQuestionIndex];
+      const buttons = optionsEl.querySelectorAll('button');
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (selectedIndex === current.answer) {
+        resultEl.textContent = "Correct! 🎉";
+        resultEl.style.color = "#2e7d32";
+      } else {
+        resultEl.textContent = `Wrong! The correct answer is: "${current.options[current.answer]}".`;
+        resultEl.style.color = "#c62828";
+      }
+      nextBtn.style.display = 'inline-block';
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= quizQuestions.length) {
+        currentQuestionIndex = 0;
+      }
+      loadQuestion();
+    });
+
+    loadQuestion();
+
+    // Newsletter form handling
+    const form = document.getElementById('subscribe-form');
+    const emailInput = document.getElementById('email');
+    const formMessage = document.getElementById('form-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (validateEmail(email)) {
+        formMessage.style.color = '#2e7d32';
+        formMessage.textContent = "Thank you for subscribing!";
+        emailInput.value = '';
+      } else {
+        formMessage.style.color = '#c62828';
+        formMessage.textContent = "Please enter a valid email.";
+      }
+    });
+
+    function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$/;
+      return re.test(email.toLowerCase());
+    }
+
+    // Space stars generation
+    function createStar(size) {
+      const star = document.createElement('div');
+      star.classList.add('star', size);
+
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDelay = (Math.random() * 3) + 's';
+
+      return star;
+    }
+
+    function createStars() {
+      const container = document.getElementById('space-decorations');
+      const starCounts = { small: 70, medium: 35, large: 15 };
+      for (const size in starCounts) {
+        for (let i = 0; i < starCounts[size]; i++) {
+          const star = createStar(size);
+          container.appendChild(star);
+        }
+      }
+    }
+
+    // Shooting star effect generation
+    function createShootingStar() {
+      const shootingStar = document.createElement('div');
+      shootingStar.classList.add('shooting-star');
+
+      const startTop = Math.random() * 50 + 10; // between 10vh and 60vh
+      const startLeft = Math.random() * 100 + 100; // start outside right viewport (100vw to 200vw)
+
+      shootingStar.style.top = startTop + 'vh';
+      shootingStar.style.left = startLeft + 'vw';
+
+      document.body.appendChild(shootingStar);
+
+      // Remove the shooting star after the animation
+      shootingStar.addEventListener('animationend', () => {
+        shootingStar.remove();
+      });
+    }
+
+    function shootingStarLoop() {
+      createShootingStar();
+      // Random interval between 3 to 7 seconds
+      const nextTime = Math.random() * 4000 + 3000;
+      setTimeout(shootingStarLoop, nextTime);
+    }
+
+    window.onload = () => {
+      createStars();
+      shootingStarLoop();
+    };
+  </script>
+</body>
+</html>
